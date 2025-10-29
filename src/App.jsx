@@ -15,6 +15,9 @@ import AuthorList from "./pages/admin/author";
 import AuthorCreate from "./pages/admin/author/create";
 import AuthorEdit from "./pages/admin/author/edit";
 
+// 🔒 Import ProtectedRoute
+import ProtectedRoute from "./routes/ProtectedRoute";
+
 function App() {
   return (
     <BrowserRouter>
@@ -30,7 +33,14 @@ function App() {
         <Route path="register" element={<Register />} />
 
         {/* ================= ADMIN ================= */}
-        <Route path="admin" element={<AdminLayout />}>
+        <Route
+          path="admin"
+          element={
+            <ProtectedRoute role="admin">
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Dashboard />} />
 
           {/* Books */}
